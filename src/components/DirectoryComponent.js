@@ -1,73 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
 
-class Directory extends Component {
 
-    render() {
-        const directory = this.props.campsites.map(campsite => {
-            return (
-                <div key={campsite.id} className="col-md-5 m-1">
-                    <Card onClick={() => this.props.onclick(campsite.id)} >
-                        <CardImg width="100%" src={campsite.image} alt={campsite.name} />
-                        <CardImgOverlay>
-                            <CardTitle>{campsite.name}</CardTitle>               
-                        </CardImgOverlay>
-                    </Card>
-                </div>
-            );
-        });
+function RenderDirectoryItem({campsite, onClick}) {
+    return (
+        <Card onClick={() => onClick(campsite.id)}>
+            <CardImg width="100%" src={campsite.image} alt={campsite.name} />
+            <CardImgOverlay>
+                <CardTitle>{campsite.name}</CardTitle>               
+            </CardImgOverlay>
+        </Card>
+    );
+}
 
-        return(
+function Directory(props) {
+    
+    const directory = props.campsites.map(campsite => {
+        return (
+            <div key={campsite.id} className="col-md-5 m-1">
+                <RenderDirectoryItem campsite={campsite} onClick={props.onClick} />
+            </div>
+        );
+    });
+
+        return (
             <div className="container">
                 <div className="row">
                     {directory}
                 </div>
-                {/* <div>
-                    CampsiteInfo
-                </div> */}
-                {/* <div className="row">
-                    <div className="col-md-5 m-1">
-                        {this.renderSelectedCampsite(this.state.selectedCampsite)}
-                    </div>
-                </div> */}
             </div>
         );
     }
-}    
+   
+
 
 export default Directory;
 
-// class ExampleParentComponent extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             number: 333
-//         }
-//     }
-//     render() {
-//         return <ExampleChildComponent number={this.state.number} greeting="Hello World!" />
-//     }
-// }
-
-// class ExampleChildComponent extends Component {
-//     render() {
-//         return <div>{this.props.greeting} {this.props.number}</div>
-//     }
-// }
-{/* <ExampleParentComponent /> */}
-// renderSelectedCampsite(campsite) {
-//     if(campsite) {
-//         return (
-//             <Card>
-//                 <CardImg top src={campsite.image} alt={campsite.name} />
-//                 <CardBody>
-//                     <CardTitle>{campsite.name}</CardTitle>
-//                     <CardText>{campsite.description}</CardText>
-//                 </CardBody>
-//             </Card>
-//         );
-//     }
-//     return <div />;
-// }
 
 
