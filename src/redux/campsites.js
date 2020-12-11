@@ -1,6 +1,5 @@
 import * as ActionTypes from './ActionTypes';
 
-
 export const Campsites = (state = {
     isLoading: true,
     errMess: null, 
